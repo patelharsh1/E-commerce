@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Registration</title>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        body {
+            background-color: #f8f9fa;
+        }
+
+        .container {
+            margin-top: 50px;
+        }
+    </style>
+</head>
+
+<body>
+{% if messages %}
+{% for i in messages %}
+<script>alert("{{ i }}");</script>
+{% endfor %}
+{% endif %}
+    <div class="container">
+        <h2>User Registration</h2>
+        <form action="/fetchregisterdata" method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+             <div class="form-group">
+                <label for="email">Name:</label>
+                <input type="text" name="uname" class="form-control" id="name" placeholder="Enter your Name.." required>
+            </div>
+            <div class="form-group">
+                <label for="email">Email:</label>
+                <input type="email" name="uemail" class="form-control" id="email" placeholder="Enter your email.." required>
+            </div>
+            <div class="form-group">
+                <label for="phone">Phone Number:</label>
+                <input type="tel" name="uphone" class="form-control" id="phone"  placeholder="Enter your Phone.." required>
+            </div>
+            <div class="form-group">
+                <label for="password">Password:</label>
+                <input type="password" name="upassword" class="form-control"  placeholder="Enter your password.." id="password" required>
+            </div>
+            <div class="form-group">
+                <label for="role">Role:</label>
+                <select name="urole" class="form-control" required>
+                    <option value="user">User</option>
+                    <option value="store_manager">Store Manager</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="dp">Profile Picture (DP):</label>
+                <input type="file" name="udp" class="form-control-file" id="dp" accept="image/*" required>
+            </div>
+            <button type="submit" class="btn btn-primary">Register</button>&nbsp;<a href="/">Click here to login!</a>
+        </form>
+    </div>
+
+    <!-- Bootstrap JS and Popper.js -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+
+</html>

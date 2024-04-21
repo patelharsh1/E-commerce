@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Single Product Details</title>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        body {
+            background-color: #f8f9fa;
+        }
+        .container {
+            margin-top: 100px;
+        }
+        .product-details {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        .product-img {
+            width: 100%;
+            max-width: 400px;
+            height: auto;
+            object-fit: cover;
+        }
+        .product-info {
+            width: 100%;
+            max-width: 400px;
+            padding: 0 20px;
+        }
+        .add-to-cart {
+            margin-top: 20px;
+        }
+        h2{
+            text-align: center;
+            margin-top: 50px;
+        }
+    </style>
+</head>
+<body>
+    <h2 >Single Product Details</h2>
+    <div class="container">
+        
+        <div class="product-details">
+            <!-- Product Image -->
+            <img src="/media/{{ data.productimg }}" alt="Product" class="product-img">
+
+            <!-- Product Details -->
+            <div class="product-info">
+                <h3>{{ data.productname }}</h3>
+                <p><strong>Price:</strong> Rs. {{ data.productprice }}</p>
+                <p><strong>Description:</strong> {{ data.productdesc }}</p>
+
+                <!-- Quantity and Add to Cart -->
+                {% if data.status %}
+                <div class="add-to-cart">
+                    <form method="post" action="/addtocart">
+                        {% csrf_token %}
+                    <label for="quantity">Quantity:</label>
+                    <input type="number" id="quantity" name="quantity" min="1" value="1" class="form-control mb-2">
+                    <input type="hidden" name="pid" value="{{ data.id }}">
+                    <input type="hidden" name="price" value="{{ data.productprice }}">
+                    <button class="btn btn-primary" type="submit">Add to Cart</button>
+                        </form>
+                </div>
+                {% else %}
+                <button class="btn btn-warning" disabled>Out of Stock</button>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS and Popper.js -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
